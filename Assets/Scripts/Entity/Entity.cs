@@ -25,9 +25,9 @@ public class Entity : MonoBehaviour
         get => this.speed;
     }
 
-    [SerializeField] protected Sprite sprite;
+    [SerializeField] protected SpriteRenderer sprite;
 
-    public Sprite Sprite
+    public SpriteRenderer Sprite
     {
         get => this.sprite;
     }
@@ -38,9 +38,7 @@ public class Entity : MonoBehaviour
 
     [SerializeField] protected NavMeshAgent agent;
 
-    [SerializeField] protected Color color = Color.red;
-
-    protected bool hasTakeDamage = false;
+    [SerializeField] protected bool hasTakeDamage = false;
 
     [SerializeField] protected float damageTime;
 
@@ -51,11 +49,14 @@ public class Entity : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        this.sprite = GetComponent<SpriteRenderer>();
+        this.collider = GetComponent<Collider>();
+        this.rb = GetComponent<Rigidbody>();
+        this.agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         if (this.hasTakeDamage)
             this.UpdateDamageAnimation();
@@ -66,6 +67,7 @@ public class Entity : MonoBehaviour
         this.health -= damage;
         this.hasTakeDamage = true;
         this.damageAnimationTimer = this.damageTime;
+        this.sprite.color = Color.red;
     }
 
     protected void UpdateDamageAnimation()
@@ -74,10 +76,13 @@ public class Entity : MonoBehaviour
         if (this.damageAnimationTimer < 0f)
         {
             this.hasTakeDamage = false;
+            this.sprite.color = Color.white;
         }
         else
         {
-
+            float factor = Mathf.Sin(this.damageAnimationTimer * 10);
+            this.sprite.color = new Color(1, 1 * factor, 1 * factor);
+            //this.sprite.color = Color.red;
         }
     }
 }
