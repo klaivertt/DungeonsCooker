@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class Entity : MonoBehaviour
 {
-#region Variables
+    #region Variables
     protected int health;
 
     public int Health
@@ -25,9 +25,14 @@ public class Entity : MonoBehaviour
         get => this.speed;
     }
 
-    [SerializeField] protected Sprite sprite;
+    public Vector3 Position
+    {
+        get => this.transform.position;
+    }
 
-    public Sprite Sprite
+    [SerializeField] protected SpriteRenderer sprite;
+
+    public SpriteRenderer Sprite
     {
         get => this.sprite;
     }
@@ -38,46 +43,88 @@ public class Entity : MonoBehaviour
 
     [SerializeField] protected NavMeshAgent agent;
 
-    [SerializeField] protected Color color = Color.red;
-
-    protected bool hasTakeDamage = false;
+    [SerializeField] protected bool hasTakeDamage = false;
 
     [SerializeField] protected float damageTime;
 
-    [SerializeField] protected float damageAnimationTimer = 0f;
+    [SerializeField] protected float timer = 0f;
 
-#endregion Variables
+    [SerializeField] protected bool isDead;
+
+    [SerializeField] protected float deathTime;
+
+    public bool IsDead
+    {
+        get => this.isDead;
+    }
+
+    #endregion Variables
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    virtual protected void Start()
     {
-        
+        this.sprite = GetComponent<SpriteRenderer>();
+        this.collider = GetComponent<Collider>();
+        this.rb = GetComponent<Rigidbody>();
+        this.agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
-    void Update()
+    virtual protected void Update()
     {
-        if (this.hasTakeDamage)
+        if (this.isDead)
+        {
+            this.UpdateDeathAnimation();
+        }
+        else if (this.hasTakeDamage)
+        {
             this.UpdateDamageAnimation();
+        }
     }
 
-    protected void TakeDamage(int damage)
+    virtual protected void OnDestroy()
+    {
+
+    }
+
+    virtual protected void TakeDamage(int damage)
     {
         this.health -= damage;
         this.hasTakeDamage = true;
-        this.damageAnimationTimer = this.damageTime;
+        this.timer = this.damageTime;
+        this.sprite.color = Color.red;
     }
 
-    protected void UpdateDamageAnimation()
+    virtual protected void UpdateDamageAnimation()
     {
-        this.damageAnimationTimer -= Time.deltaTime;
-        if (this.damageAnimationTimer < 0f)
+        this.timer -= Time.deltaTime;
+        if (this.timer < 0f)
         {
             this.hasTakeDamage = false;
+            this.sprite.color = Color.white;
         }
         else
         {
+            float factor = Mathf.Sin(this.timer * 10);
+            this.sprite.color = new Color(1, 1 * factor, 1 * factor);
+        }
+    }
 
+    virtual protected void SetDeath()
+    {
+        this.isDead = true;
+        this.agent.enabled = false;
+        this.collider.enabled = false;
+        this.rb.isKinematic = true;
+    }
+
+    virtual protected void UpdateDeathAnimation()
+    {
+        this.timer += Time.deltaTime;
+        if (this.timer < this.deathTime)
+        {
+            float angle = Mathf.Lerp(0, 90, this.timer / this.deathTime);
+            this.transform.rotation = Quaternion.Euler(angle, 0f, 0f);
         }
     }
 }
