@@ -1,16 +1,30 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static Unity.U2D.Physics.PhysicsBody;
 
+
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] float speed = 5f;
+    InputAction moveAction;
+
+    Rigidbody rb;
+    Vector2 moveDir;
+
+    void Awake()
     {
-       
+        rb = GetComponent<Rigidbody>();
+        moveAction = InputSystem.actions.FindAction("Move");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        moveDir = moveAction.ReadValue<Vector2>();
+    }
+    void FixedUpdate()
+    {
+        Vector3 dir = new Vector3(moveDir.x, 0f, moveDir.y);
+        rb.linearVelocity = new Vector3(dir.x * speed, rb.linearVelocity.y, dir.z * speed);
     }
 }
