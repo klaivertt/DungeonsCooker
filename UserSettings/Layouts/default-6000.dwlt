@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Console
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -330,7 +330,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprite
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -341,25 +341,25 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Sprite
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Etudiant2\Desktop\Dungeons Cooker
+  m_LastProjectPath: C:\Users\Etudiant2\Desktop\DC_Git\DungeonsCooker
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_rawData: 14293651194867
+    - m_rawData: 1099511666594
     m_LastClickedID:
-      m_rawData: 14293651194867
+      m_rawData: 1099511666594
     m_ExpandedIDs:
     - m_rawData: 0
     - m_rawData: 6442450943
-    - m_rawData: 1099511653401
-    - m_rawData: 1099511653774
-    - m_rawData: 1099511653779
-    - m_rawData: 1099511653803
+    - m_rawData: 1099511666587
+    - m_rawData: 1099511666591
+    - m_rawData: 1099511666594
+    - m_rawData: 31885837244380
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -391,9 +391,7 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_rawData: 0
-    m_ExpandedIDs:
-    - m_rawData: 0
-    - m_rawData: 1099511653401
+    m_ExpandedIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -422,9 +420,9 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_rawData: 18691697698255
+    - m_rawData: 49478023288848
     m_LastClickedEntityId:
-      m_rawData: 18691697698255
+      m_rawData: 49478023288848
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -503,7 +501,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 756
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -1036,9 +1034,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -0.2713856, y: -0.10403112, z: 0.34420744}
+    m_Target: {x: -19.640255, y: -5.6914353, z: -0.9421432}
     speed: 2
-    m_Value: {x: -0.2713856, y: -0.10403112, z: 0.34420744}
+    m_Value: {x: -19.640255, y: -5.6914353, z: -0.9421432}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1085,13 +1083,13 @@ MonoBehaviour:
     m_gridOpacity: 0.5
     m_NearestPlaneToHandleMode: 0
   m_Rotation:
-    m_Target: {x: -0.16899456, y: 0.0020670157, z: -0.00035435995, w: -0.98561597}
+    m_Target: {x: -0.24358702, y: -0.043048605, z: 0.0108233085, w: -0.96886605}
     speed: 2
-    m_Value: {x: -0.16899435, y: 0.0020670132, z: -0.0003543595, w: -0.9856148}
+    m_Value: {x: -0.24358623, y: -0.043048467, z: 0.010823274, w: -0.96886295}
   m_Size:
-    m_Target: 4.088984
+    m_Target: 17.385609
     speed: 2
-    m_Value: 4.088984
+    m_Value: 16.636946
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1601,7 +1599,7 @@ MonoBehaviour:
     m_DynamicPanelBehaviorModified: 0
   m_ViewState:
     ValidContent: 10
-    ViewModelState: 7adaee72040000001c000000fc0000000200000005000000ffffffff2212f54802000000180000000100000076fa4866010000002c00000004000000999c27a03b650a46a277b1ae3169a950a6050000000500000100000002000000c755b413000000000000000000000000999c27a03b650a46a277b1ae3169a950596200000005000000000000020000007f6e7118000000000000000000000000999c27a03b650a46a277b1ae3169a9502e6400000007000000000000020000001d18a031000000000000000000000000999c27a03b650a46a277b1ae3169a950fb640000000300000000000002000000c35f2f34000000000000000000000000999c27a03b650a46a277b1ae3169a950cf6500000011000002000000y
+    ViewModelState: 7adaee72040000001c0000008c0100000200000008000000ffffffff2212f54802000000180000000100000076fa4866010000002c00000007000000999c27a03b650a46a277b1ae3169a95019050000000500000100000002000000c755b413000000000000000000000000999c27a03b650a46a277b1ae3169a950397500000005000000000000020000007f6e7118000000000000000000000000999c27a03b650a46a277b1ae3169a950b59600000005000000000000020000001d18a031000000000000000000000000999c27a03b650a46a277b1ae3169a950ba960000000500000000000002000000c35f2f34000000000000000000000000999c27a03b650a46a277b1ae3169a950bd960000000500000000000002000000b238c66e000000000000000000000000999c27a03b650a46a277b1ae3169a9508397000000190000000000000200000095bcdf25000000000000000000000000999c27a03b650a46a277b1ae3169a950919700000011000000000000020000000873715e000000000000000000000000999c27a03b650a46a277b1ae3169a95010980000002d000002000000y
     SearchText: 
     Columns:
     - ColumnId: Visibility

@@ -25,6 +25,11 @@ public class Entity : MonoBehaviour
         get => this.speed;
     }
 
+    public Vector3 Position
+    {
+        get => this.transform.position;
+    }
+
     [SerializeField] protected SpriteRenderer sprite;
 
     public SpriteRenderer Sprite
@@ -47,7 +52,7 @@ public class Entity : MonoBehaviour
 #endregion Variables
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected void Start()
     {
         this.sprite = GetComponent<SpriteRenderer>();
         this.collider = GetComponent<Collider>();

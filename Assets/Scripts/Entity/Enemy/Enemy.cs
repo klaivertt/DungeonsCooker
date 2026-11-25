@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class Enemy : Entity
 {
-    [SerializeField] protected Vector3 target;
+    [SerializeField] protected Transform target;
 
     [SerializeField] float timerWander;
     [SerializeField] float rangeWanger = 10;
@@ -17,7 +17,8 @@ public class Enemy : Entity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        base.Start();
+        this.target = FindAnyObjectByType<Entity>().transform;
     }
 
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class Enemy : Entity
             DetectionPlayer();
             if (this.playerInRange)
             {
-                this.agent.SetDestination(this.target);
+                this.agent.SetDestination(this.target.position);
             }
             else
             {
@@ -49,23 +50,19 @@ public class Enemy : Entity
         //Instantiate Drop Item
     }
 
-    void MoveToTarget()
-    {
-        this.agent.nextPosition = this.target;
-    }
 
     void DetectionPlayer()
     {
         this.playerInRange = false;
-        if (Vector3.Distance(this.transform.position, this.target) < this.rangeDetection) // a portée du joueur
+        if (Vector3.Distance(this.transform.position, this.target.position) < this.rangeDetection) // a portée du joueur
         {
-            Vector3 directionToPlayer = this.target - this.transform.position;
+            Vector3 directionToPlayer = this.target.position - this.transform.position;
             if (Vector3.Angle(this.transform.forward, directionToPlayer) < this.angleDetection) // dans son champ de vision
             {
                 RaycastHit hit;
                 if (Physics.Raycast(this.transform.position, directionToPlayer, out hit, this.rangeDetection))
                 {
-                    if (hit.transform.position == this.target)
+                    if (hit.transform.position == this.target.position)
                     {
                         this.playerInRange = true;
                     }
