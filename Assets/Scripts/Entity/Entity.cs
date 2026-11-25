@@ -67,6 +67,8 @@ public class Entity : MonoBehaviour
         this.collider = GetComponent<Collider>();
         this.rb = GetComponent<Rigidbody>();
         this.agent = GetComponent<NavMeshAgent>();
+
+        this.SetDeath();
     }
 
     // Update is called once per frame
