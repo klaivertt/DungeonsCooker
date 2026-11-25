@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class Enemy : Entity
 {
+    #region Variables
+
     [SerializeField] protected Transform target;
 
     [SerializeField] float timerWander;
@@ -14,44 +16,49 @@ public class Enemy : Entity
 
     //Drop item
 
+    #endregion
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
         base.Start();
         this.target = FindAnyObjectByType<Entity>().transform;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        if (!this.hasTakeDamage)
+        if (!this.isDead)
         {
-            DetectionPlayer();
-            if (this.playerInRange)
+            if (!this.hasTakeDamage)
             {
-                this.agent.SetDestination(this.target.position);
-            }
-            else
-            {
-                this.timerWander -= Time.deltaTime;
-                if (this.timerWander <= 0)
+                DetectionPlayer();
+                if (this.playerInRange)
                 {
-                    this.timerWander = 10.0f;
-                    this.agent.SetDestination(GetRandomPosition());
+                    this.agent.SetDestination(this.target.position);
+                }
+                else
+                {
+                    this.timerWander -= Time.deltaTime;
+                    if (this.timerWander <= 0)
+                    {
+                        this.timerWander = 10.0f;
+                        this.agent.SetDestination(GetRandomPosition());
+                    }
                 }
             }
-        }
 
-        base.Update();
+            base.Update();
+        }
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
         //Instantiate Drop Item
     }
 
 
-    void DetectionPlayer()
+    virtual protected void DetectionPlayer()
     {
         this.playerInRange = false;
         if (Vector3.Distance(this.transform.position, this.target.position) < this.rangeDetection) // a portée du joueur
@@ -71,7 +78,7 @@ public class Enemy : Entity
         }
     }
 
-    Vector3 GetRandomPosition()
+    virtual protected Vector3 GetRandomPosition()
     {
         int count = 10;
 
@@ -86,5 +93,25 @@ public class Enemy : Entity
 
 
         return desiredPosition;
+    }
+    virtual protected private void OnDrawGizmos()
+    {
+        if (playerInRange)
+        {
+            Gizmos.color = new Color(1, 0, 0, 1f);
+        }
+        else
+        {
+            Gizmos.color = new Color(0, 1, 0, 1f);
+        }
+        Gizmos.DrawWireSphere(transform.position, rangeDetection);
+
+        Quaternion rotationLeft = Quaternion.Euler(0, -angleDetection, 0);
+        Vector3 dirLeft = rotationLeft * transform.forward;
+        Quaternion rotationRight = Quaternion.Euler(0, angleDetection, 0);
+        Vector3 dirRight = rotationRight * transform.forward;
+
+        Gizmos.DrawLine(transform.position, transform.position + dirLeft * rangeDetection);
+        Gizmos.DrawLine(transform.position, transform.position + dirRight * rangeDetection);
     }
 }
